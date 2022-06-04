@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
-   #'whitenoise.middleware.WhiteNoiseMiddleware' ,
+     'whitenoise.middleware.WhiteNoiseMiddleware',
    #'livereload.middleware.LiveReloadScript',
 
 ]
@@ -91,7 +93,9 @@ DATABASES = {
 
     }
 }
-
+#DATABASES['default'] = dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -133,7 +137,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 STATIC_DIR,
 ]
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+django_heroku.settings(locals())
+
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 #STATIC_ROOT = "/home/watermelon/static"
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
