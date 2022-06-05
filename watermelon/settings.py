@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-x(q7!33s4g-n=w1-y*ht2(!#qzxhkj8vz&-9v)k8t$n$xju(tu
 DEBUG = True
 
 ALLOWED_HOSTS = ['weather4s.herokuapp.com']
-
+#https://weather4s.herokuapp.com/
 
 # Application definition
 
