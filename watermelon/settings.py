@@ -82,17 +82,19 @@ WSGI_APPLICATION = 'watermelon.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         #'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-#DATABASES['default'] = dj_database_url
-#db_from_env = dj_database_url.config(conn_max_age=600)
-#DATABASES['default'].update(db_from_env)
+
+DATABASES['default'] = dj_database_url.config(default='postgres://ryeouwjqmgzyxk:c6fc2a6c987df55bb958e505a54416ab342e566640c10462695c60575107a279@ec2-18-214-134-226.compute-1.amazonaws.com:5432/d67mcpbgd9uohr')
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
